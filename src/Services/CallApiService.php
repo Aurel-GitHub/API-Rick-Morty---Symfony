@@ -15,31 +15,17 @@ class CallApiService
 
     public function getAllCharacters(): array
     {
-        $response = $this->client->request(
-            'GET',
-            'https://rickandmortyapi.com/api/character'
-        );
-
-        return $response->toArray();
+        return $this->getApi('character');
     }
 
-    public function getAllLocations(): array
+    private function getApi(string $var)
     {
         $response = $this->client->request(
             'GET',
-            'https://rickandmortyapi.com/api/location'
+            'https://rickandmortyapi.com/api/' . $var
         );
 
         return $response->toArray();
-    }
-    
-    public function getAllEpisodes(): array
-    {
-        $response = $this->client->request(
-            'GET',
-            'https://rickandmortyapi.com/api/episode'
-        );
+    } 
 
-        return $response->toArray();
-    }
 }
