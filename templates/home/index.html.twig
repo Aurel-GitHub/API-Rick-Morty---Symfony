@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-3">
+			{# {% include '_filter.html.twig' with {form: form} only%}  #}
+            {% include "_filter.html.twig" %}
+			</div>
+		<div class="col-md-9">
+			<h3 class="h3-personnages">Personnages</h3>
+			<div class="row character-container">
+				{# {% for product in products %}             #}
+				<div class="col-md-4">
+					<div class="character-item text-center">
+						<a href="{{ path('character')}}"><img src="{{ data.results.0.image }}" alt="XXX" class="img-fluid" style="padding: 10px; margin-top: none"></img></a>
+					<h5>{{ data.results.0.name}}</h5>
+                        {% if data.results.0.status == 'Alive' %}
+                            <img src="/assets/img/online.png" alt="status a live">
+                            {% else %}
+                                <img src="/assets/img/offline.png" alt="status dead">
+                            {% endif %}
+				</div>
+			</div>
+			{# {% endfor %}     #}
+		</div>
+	</div>
+</div>{% endblock %}
