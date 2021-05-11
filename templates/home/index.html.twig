@@ -5,12 +5,7 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-md-3">
-			{# {% include '_filter.html.twig' with {form: form} only%}  #}
-            {% include "_filter.html.twig" %}
-			</div>
-		<div class="col-md-9">
-			<h3 class="h3-personnages">Personnages</h3>
+		<div class="col-md-12">
 			<div class="row character-container">
 				{% for character in characters.results %}             
 				<div class="col-md-4">
