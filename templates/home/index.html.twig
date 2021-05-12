@@ -1,27 +1,7 @@
-{% extends 'base.html.twig' %}
-
+{% extends "base.html.twig" %}
 {% block title %}Accueil
 {% endblock %}
 
 {% block body %}
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row character-container">
-				{% for character in characters.results %}             
-				<div class="col-md-4">
-					<div class="character-item text-center">
-						 <a href="{{ path('character')}}"><img src="{{ character.image }}" alt="XXX" class="img-fluid" style="padding: 10px; margin-top: none"></img></a>
-					<h5>{{ character.name}}</h5>
-                         {% if character.status == 'Alive' %}
-                            a live
-                            {% elseif  character.status == 'Dead' %}
-                                dead
-                                {% else %}
-                                    unknow                             
-                            {% endif %}  
-				</div>
-			</div>
-			 {% endfor %}
-		</div>
-	</div>
-</div>{% endblock %}
+ici accueil
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NAME{% endblock %}
+
+{% block body %}
+<div class="row" style="padding-top:10rem">
+        <div class="col-md-5">
+            <img src="{{ character.image }}" alt="{{ character.name}}" class="img-fluid"></img>        
+        </div>
+        <div class="col-md-7 my-auto">
+            <h2>{{ character.name}}</h2>
+                <ul style="	list-style: none;">
+                    <h5>
+                        <li>Status : {{ character.status }}</li>
+                        <li>Species : {{ character.species }}</li>       
+                        <li>Gender : {{ character.gender }}</li>    
+                        <li>Type : {{ character.type }}</li>
+                        <li>Name : {{ character.origin.name}}</li>
+                        <li>url : {{ character.origin.url}}</li>
+                    </h5>
+                        <hr><br>
+                        <h3>Location</h3>
+                    <h5>
+                        <li>Name : {{ character.location.name }}</li>
+                        <li>url : {{ character.location.url }}</li>
+                    </h5>
+                        <hr><br>
+                        <h3>Episodes</h3>
+                    <h5>
+                        {% for movie in character.episode %}
+                            <li>{{ movie}}</li>
+                        {% endfor %}
+                    </h5>
+                    <hr>
+                    <small>created : {{ character.created|date("d/m/Y")}}</small>
+                    
+
+                    
+                </ul>
+        <hr>     
+        </div>
+    </div>
+{% endblock %}

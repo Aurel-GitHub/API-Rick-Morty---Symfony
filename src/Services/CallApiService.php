@@ -18,6 +18,11 @@ class CallApiService
         return $this->getApi('character');
     }
 
+    public function getCharacterById($id): array
+    {
+        return $this->getApi('character/'. $id);
+    }
+
     private function getApi(string $var)
     {
         $response = $this->client->request(
@@ -26,6 +31,7 @@ class CallApiService
         );
 
         return $response->toArray();
-    } 
+    }
 
+    
 }
