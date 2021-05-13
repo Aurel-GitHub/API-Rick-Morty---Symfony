@@ -13,12 +13,7 @@ class CallApiService
         $this->client = $client;
     }
 
-    public function getAllCharacters(): array
-    {
-        return $this->getApi('character');
-    }
-
-    public function getCharactersByPage($page): array
+    public function getCharactersByPage($page = 1): array
     {
         return $this->getApi('character/?page=' . $page);
     }
@@ -27,7 +22,6 @@ class CallApiService
     {
         return $this->getApi('character/'. $id);
     }
-
 
     private function getApi(string $var)
     {
@@ -38,6 +32,8 @@ class CallApiService
 
         return $response->toArray();
     }
+
+
 
     
 }
