@@ -13,16 +13,6 @@ class CallApiService
         $this->client = $client;
     }
 
-    public function getCharactersByPage($page = 1): array
-    {
-        return $this->getApi('character/?page=' . $page);
-    }
-
-    public function getCharacterById($id): array
-    {
-        return $this->getApi('character/'. $id);
-    }
-
     private function getApi(string $var)
     {
         $response = $this->client->request(
@@ -32,6 +22,28 @@ class CallApiService
 
         return $response->toArray();
     }
+
+    public function getCharactersByPage($page = 1): array
+    {
+        return $this->getApi('character/?page=' . $page);
+    }
+
+    public function getCharacterById(int $id): array
+    {
+        return $this->getApi('character/'. $id);
+    }
+
+    public function getLocationByPage($page = 1): array
+    {
+        return $this->getApi('location/?page=' . $page);
+    }
+
+    public function getLocationById(int $id)
+    {
+        return $this->getApi('location/' . $id);
+    }
+
+    
 
 
 

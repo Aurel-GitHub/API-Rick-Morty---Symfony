@@ -15,8 +15,7 @@
                         <li>Species : {{ character.species }}</li>       
                         <li>Gender : {{ character.gender }}</li>    
                         <li>Type : {{ character.type }}</li>
-                        <li>Name : {{ character.origin.name}}</li>
-                        <li>url : {{ character.origin.url}}</li>
+                        <li>Planet origin : <a href="{{ path('location_show', {'id': link_origin}) }}">{{ character.origin.name}}</a></li>
                     </h5>
                         <hr><br>
                         <h3>Location</h3>

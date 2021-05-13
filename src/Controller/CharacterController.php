@@ -16,15 +16,14 @@ class CharacterController extends AbstractController
     {
         $result = $callApiService->getCharactersByPage($page);
         $nextLink = $result['info']['next'];
-        $prevLink = $result['info']['prev'];
-        
+        $prevLink = $result['info']['prev'];        
     
         if(strlen($nextLink) == 49){
             $nextPage = intval(substr($nextLink, -1), 10);
         }elseif(strlen($nextLink) == 50){
             $nextPage = intval(substr($nextLink, -2), 10);
             
-        }elseif(!$nextLink){
+        }else{
             $nextPage = null;
         }
 
@@ -32,7 +31,7 @@ class CharacterController extends AbstractController
             $prevPage = intval(substr($prevLink, -1), 10);
         }elseif(strlen($prevLink) == 50){
             $prevPage = intval(substr($prevLink, -2), 10);
-        }elseif (!$prevLink) {
+        }else{
             $prevPage = null;
         }
 
@@ -48,8 +47,20 @@ class CharacterController extends AbstractController
      */
     public function show(CallApiService $callApiService, int $id): Response
     {
+        $result = $callApiService->getCharacterById($id);
+        $originLink = $result['origin']['url'];
+        
+        if(strlen($originLink) == 42){
+            $linkPlanet = intval(substr($originLink, -1), 10);
+        }elseif(strlen($originLink) == 43){
+            $linkPlanet = intval(substr($originLink, -2), 10);
+        }else{
+            $linkPlanet = null;
+        }
+
         return $this->render('character/show.html.twig', [
-            'character' => $callApiService->getCharacterById($id),
+            'character' => $result,
+            'link_origin' => $linkPlanet
         ]);
     }
 }

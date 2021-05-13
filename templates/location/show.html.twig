@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ location.name }}{% endblock %}
+
+{% block body %}
+<div class="row" style="padding-top:3rem">
+        <div class="col-md-12 my-auto">
+            <h2>{{ location.name}}</h2>
+                <ul style="	list-style: none;">
+                    <h5>
+                        <li>Type : {{ location.type }}</li>
+                        <li>Dimension : {{ location.dimension }}</li>       
+                    </h5>
+                        <hr><br>
+                        <h3>Résidents</h3>
+                    <h5>
+                    {% for result in results %}
+                        <li><a href="{{ path('character_show', {'id': result}) }}">Résident</a></li>
+                    {% endfor %}
+                    <hr>
+                    <small>created : {{ location.created|date("d/m/Y")}}</small>
+                </ul>
+        <hr>     
+        </div>
+    </div>
+{% endblock %}
