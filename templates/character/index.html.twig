@@ -6,6 +6,9 @@
 {% block body %}
 	<div class="row">
 		<div class="col-md-12">
+		<pre>
+			{{ dump(characters) }}
+		</pre>
 			<div class="row character-container">
 				{% for character in characters.results %}             
 				<div class="col-md-4">
@@ -25,9 +28,15 @@
 
 		</div>
 		<div class="pages"> 
-			<a href="##">Page précédente</a>
-			 | 
-			 <a href="#">Page suivante</a> 
+		{% if prev_page == null %}
+		{% else %}
+		<a href="{{ path('characters', {'page': prev_page}) }}">Page précédente</a>
+		{% endif %}
+			 |
+		{% if next_page == null %}
+		{% else %} 
+			 <a href="{{ path('characters', {'page': next_page}) }}">Page suivante</a> 
+		{% endif %}
 		</div>
 	</div>
 </div>

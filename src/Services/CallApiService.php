@@ -18,10 +18,16 @@ class CallApiService
         return $this->getApi('character');
     }
 
+    public function getCharactersByPage($page): array
+    {
+        return $this->getApi('character/?page=' . $page);
+    }
+
     public function getCharacterById($id): array
     {
         return $this->getApi('character/'. $id);
     }
+
 
     private function getApi(string $var)
     {
