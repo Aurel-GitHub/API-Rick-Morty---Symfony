@@ -5,22 +5,21 @@
 {% block body %}
 <div class="row" style="padding-top:3rem">
         <div class="col-md-12 my-auto">
-            <h2>{{ location.name}}</h2>
-                <ul style="	list-style: none;">
-                    <h5>
-                        <li>Type : {{ location.type }}</li>
-                        <li>Dimension : {{ location.dimension }}</li>       
-                    </h5>
-                        <hr><br>
-                        <h3>Résidents</h3>
-                    <h5>
-                    {% for result in results %}
-                        <li><a href="{{ path('character_show', {'id': result}) }}">Résident</a></li>
-                    {% endfor %}
+            <ul style="	list-style: none;">
+                <h1>{{ location.name}}</h1>
+                <h5>
+                    <li>Type : {{ location.type }}</li>
+                    <li>Dimension : {{ location.dimension }}</li>       
+                </h5>
                     <hr>
-                    <small>created : {{ location.created|date("d/m/Y")}}</small>
-                </ul>
-        <hr>     
+                    <h3>Résidents</h3>
+                <h5>
+                {% for result in results %}
+                        <th><a href="{{ path('character_show', {'id': result}) }}">Résident {{ result }}</a></th>
+                {% endfor %}
+                <hr>
+                <small>Created : {{ location.created|date("d/m/Y")}}</small>
+            </ul>
         </div>
     </div>
 {% endblock %}

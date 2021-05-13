@@ -6,6 +6,10 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CallApiService
 {
+    const CHARACTER = "character";
+    const LOCATION = 'location';
+    const EPISODE = 'episode';
+
     private $client;
 
     public function __construct(HttpClientInterface $client)
@@ -15,37 +19,18 @@ class CallApiService
 
     private function getApi(string $var)
     {
-        $response = $this->client->request(
-            'GET',
-            'https://rickandmortyapi.com/api/' . $var
-        );
-
+        $response = $this->client->request('GET', 'https://rickandmortyapi.com/api/' . $var);
         return $response->toArray();
     }
 
-    public function getCharactersByPage($page = 1): array
+    public function getResultByPage(string $type, $page = 1): array
     {
-        return $this->getApi('character/?page=' . $page);
+        return $this->getApi($type. '/?page=' . $page);
     }
 
-    public function getCharacterById(int $id): array
+    public function getResultById(string $type, int $id): array
     {
-        return $this->getApi('character/'. $id);
+        return $this->getApi($type .'/'. $id);
     }
 
-    public function getLocationByPage($page = 1): array
-    {
-        return $this->getApi('location/?page=' . $page);
-    }
-
-    public function getLocationById(int $id)
-    {
-        return $this->getApi('location/' . $id);
-    }
-
-    
-
-
-
-    
 }

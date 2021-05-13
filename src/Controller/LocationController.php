@@ -14,7 +14,7 @@ class LocationController extends AbstractController
      */
     public function index(CallApiService $callApiService, int $page): Response
     {
-        $result = $callApiService->getLocationByPage($page);
+        $result = $callApiService->getResultByPage(CallApiService::LOCATION, $page);
         $nextLink = $result['info']['next'];
         $prevLink = $result['info']['prev'];
 
@@ -46,7 +46,7 @@ class LocationController extends AbstractController
      */
     public function show(CallApiService $callApiService, int $id): Response
     {
-        $result = $callApiService->getLocationById($id);
+        $result = $callApiService->getResultById(CallApiService::LOCATION, $id);
 
         $arrayLink = [];
         foreach($result['residents'] as $key => $link){
@@ -69,27 +69,5 @@ class LocationController extends AbstractController
             'results' => $arrayLink
         ]);
     }
-
-    // /**
-    //  * @Route("/character/{id}", name="character_show")
-    //  */
-    // public function show(CallApiService $callApiService, int $id): Response
-    // {
-    //     $result = $callApiService->getCharacterById($id);
-    //     $originLink = $result['origin']['url'];
-        
-    //     if(strlen($originLink) == 42){
-    //         $linkPlanet = intval(substr($originLink, -1), 10);
-    //     }elseif(strlen($originLink) == 43){
-    //         $linkPlanet = intval(substr($originLink, -2), 10);
-    //     }elseif(!$originLink){
-    //         $linkPlanet = null;
-    //     }
-
-    //     return $this->render('character/show.html.twig', [
-    //         'character' => $result,
-    //         'link_origin' => $linkPlanet
-    //     ]);
-    // }
 
 }

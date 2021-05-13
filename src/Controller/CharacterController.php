@@ -14,7 +14,7 @@ class CharacterController extends AbstractController
      */
     public function index(CallApiService $callApiService, int $page): Response
     {
-        $result = $callApiService->getCharactersByPage($page);
+        $result = $callApiService->getResultByPage(CallApiService::CHARACTER, $page);
         $nextLink = $result['info']['next'];
         $prevLink = $result['info']['prev'];        
     
@@ -47,10 +47,11 @@ class CharacterController extends AbstractController
      */
     public function show(CallApiService $callApiService, int $id): Response
     {
-        $result = $callApiService->getCharacterById($id);
+        $result = $callApiService->getResultById(CallApiService::CHARACTER, $id);
         $originLink = $result['origin']['url'];
+        $locationLink = $result['location']['url'];
         
-        if(strlen($originLink) == 42){
+        if(strlen($originLink) == 42 ){
             $linkPlanet = intval(substr($originLink, -1), 10);
         }elseif(strlen($originLink) == 43){
             $linkPlanet = intval(substr($originLink, -2), 10);
@@ -58,9 +59,36 @@ class CharacterController extends AbstractController
             $linkPlanet = null;
         }
 
+        if(strlen($locationLink) == 42 ){
+            $linkEart = intval(substr($locationLink, -1), 10);
+        }elseif(strlen($locationLink) == 43){
+            $linkEart = intval(substr($locationLink, -2), 10);
+        }else{
+            $linkEart = null;
+        }
+
+        $arrayLink = [];
+        foreach($result['episode'] as $key => $link){
+            if(strlen($link) == 41){
+                $linkEpisode = intval(substr($link, -1), 10);
+                $arrayLink[] = $linkEpisode;
+            }elseif(strlen($link) == 42){
+                $linkEpisode = intval(substr($link, -2), 10);
+                $arrayLink[] = $linkEpisode;
+            }elseif(strlen($link) == 43){
+                $linkEpisode = intval(substr($link, -3), 10);
+                $arrayLink[] = $linkEpisode;
+            }else{
+                $linkEpisode= null;
+            }
+        }
+
         return $this->render('character/show.html.twig', [
             'character' => $result,
-            'link_origin' => $linkPlanet
+            'link_origin' => $linkPlanet,
+            'link_location' =>$linkEart,
+            'results' => $arrayLink
+
         ]);
     }
 }
