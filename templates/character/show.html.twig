@@ -8,33 +8,40 @@
             <img src="{{ character.image }}" alt="{{ character.name}}" class="img-fluid"></img>        
         </div>
         <div class="col-md-7 my-auto">
-            <h2>{{ character.name}}</h2>
-                <ul style="	list-style: none;">
-                    <h5>
-                        <li>Status : {{ character.status }}</li>
-                        <li>Species : {{ character.species }}</li>       
-                        <li>Gender : {{ character.gender }}</li>    
+            <ul style="	list-style: none;">
+                <h1>{{ character.name}}</h1>
+                <h5>
+                    <li>Status : {{ character.status }}</li>
+                    <li>Species : {{ character.species }}</li>       
+                    <li>Gender : {{ character.gender }}</li>
+                    {% if character.type != null   %}
                         <li>Type : {{ character.type }}</li>
-                        <li>Name : {{ character.origin.name}}</li>
-                        <li>url : {{ character.origin.url}}</li>
-                    </h5>
-                        <hr><br>
-                        <h3>Location</h3>
-                    <h5>
-                        <li>Name : {{ character.location.name }}</li>
-                        <li>url : {{ character.location.url }}</li>
-                    </h5>
-                        <hr><br>
-                        <h3>Episodes</h3>
-                    <h5>
-                        {% for movie in character.episode %}
-                            <li>{{ movie}}</li>
-                        {% endfor %}
-                    </h5>
+                        {% else %}
+                    {% endif %}
+                    {% if character.origin.url != null %}
+                        <li>Planet origin : <a href="{{ path('location_show', {'id': link_origin}) }}">{{ character.origin.name}}</a></li>
+                        {% else %}
+                    {% endif %}                        
+                </h5>
+                    {% if character.location.url != null %}
                     <hr>
-                    <small>created : {{ character.created|date("d/m/Y")}}</small>
-                </ul>
-        <hr>     
+                    <h3>Location</h3>
+                    <h5>
+                        <li><a href="{{  path('location_show', {'id': link_location}) }}">{{ character.location.name }}</a></li>
+                        {% else %}
+                    {% endif %}
+                </h5>
+                    <hr><br>
+                    <h3>Episodes</h3>
+                <h5>
+                    {% for result in results %}
+                        <a href="{{ path('episode_show', {'id': result}) }}">Episode {{result}}</a>
+                    {% endfor %}
+                </h5>
+                <hr>
+                <small>created : {{ character.created|date("d/m/Y")}}</small>
+            </ul>     
         </div>
     </div>
+</div>
 {% endblock %}

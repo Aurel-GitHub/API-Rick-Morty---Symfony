@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Episodes{% endblock %}
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row character-container">
+				<h1 style="text-align:center; margin-top:1%">Episodes</h1>
+				 {% for episode in episodes.results %}             
+				<div class="col-md-12">
+					<div class="character-item text-center">
+						<a href="{{ path('episode_show', {'id': episode.id}) }}"><h4>{{ episode.name }}</h4></a>
+				</div>
+			</div>
+			 {% endfor %}
+		</div>
+	</div>
+    <div class="pages" style="padding-top: 2%;padding-bottom: 2%;text-align:center;font-size:16px"> 
+		{% if prev_page != null %}
+				<a href="{{ path('episodes', {'page': prev_page}) }}">Page précédente</a>
+			{% else %}
+		{% endif %}
+			 |
+		{% if next_page != null %}
+				<a href="{{ path('episodes', {'page': next_page}) }}">Page suivante</a>
+			{% else %} 
+		{% endif %} 
+    </div> 
+{% endblock %}
